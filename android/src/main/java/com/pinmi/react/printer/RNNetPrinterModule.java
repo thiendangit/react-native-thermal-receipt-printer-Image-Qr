@@ -37,7 +37,9 @@ public class RNNetPrinterModule extends ReactContextBaseJavaModule implements RN
     @ReactMethod
     @Override
     public void closeConn() {
-        this.adapter = NetPrinterAdapter.getInstance();
+        if (this.adapter == null) {
+            this.adapter = NetPrinterAdapter.getInstance();
+        }
         this.adapter.closeConnectionIfExists();
     }
 

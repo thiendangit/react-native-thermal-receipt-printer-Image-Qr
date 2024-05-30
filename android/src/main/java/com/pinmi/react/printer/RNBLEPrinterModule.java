@@ -45,7 +45,10 @@ public class RNBLEPrinterModule extends ReactContextBaseJavaModule implements RN
     @ReactMethod
     @Override
     public void closeConn() {
-        adapter.closeConnectionIfExists();
+        if (this.adapter == null) {
+            this.adapter = BLEPrinterAdapter.getInstance();
+        }
+        this.adapter.closeConnectionIfExists();
     }
 
     @ReactMethod

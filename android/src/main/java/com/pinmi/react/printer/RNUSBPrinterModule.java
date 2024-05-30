@@ -42,7 +42,10 @@ public class RNUSBPrinterModule extends ReactContextBaseJavaModule implements RN
     @ReactMethod
     @Override
     public void closeConn()  {
-        adapter.closeConnectionIfExists();
+        if (this.adapter == null) {
+            this.adapter = USBPrinterAdapter.getInstance();
+        }
+        this.adapter.closeConnectionIfExists();
     }
 
     @ReactMethod
