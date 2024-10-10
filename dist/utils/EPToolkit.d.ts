@@ -1,5 +1,5 @@
 /// <reference types="node" />
-declare type IOptions = {
+type IOptions = {
     beep: boolean;
     cut: boolean;
     tailingLine: boolean;

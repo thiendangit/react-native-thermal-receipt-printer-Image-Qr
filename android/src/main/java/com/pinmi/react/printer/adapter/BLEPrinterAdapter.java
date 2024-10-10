@@ -78,6 +78,13 @@ public class BLEPrinterAdapter implements PrinterAdapter{
 
     }
 
+    public boolean isConnected(){
+        if(this.mBluetoothSocket != null){
+            return this.mBluetoothSocket.isConnected();
+        }
+        return false;
+    }
+
     private static BluetoothAdapter getBTAdapter() {
         return BluetoothAdapter.getDefaultAdapter();
     }
