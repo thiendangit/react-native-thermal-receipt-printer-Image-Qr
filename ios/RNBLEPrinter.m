@@ -85,7 +85,7 @@ RCT_EXPORT_METHOD(printRawData:(NSString *)text
 
         NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:text options:0];
         NSString *decodedString = [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
-        
+
         NSNumber* boldPtr = [options valueForKey:@"bold"];
         NSNumber* alignCenterPtr = [options valueForKey:@"center"];
 
@@ -241,6 +241,19 @@ RCT_EXPORT_METHOD(closeConn) {
         m_printer = nil;
     } @catch (NSException *exception) {
         NSLog(@"%@", exception.reason);
+    }
+}
+
+RCT_EXPORT_METHOD(isConnected:(RCTResponseSenderBlock)successCallback) {
+    @try {
+        if (m_printer) {
+            successCallback(@[@(YES)]);
+        } else {
+            successCallback(@[@(NO)]);
+        }
+    } @catch (NSException *exception) {
+        NSLog(@"%@", exception.reason);
+        successCallback(@[@(NO)]);
     }
 }
 
