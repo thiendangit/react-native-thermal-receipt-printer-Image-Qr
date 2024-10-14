@@ -43,6 +43,14 @@ public class RNBLEPrinterModule extends ReactContextBaseJavaModule implements RN
     }
 
     @ReactMethod
+    public void isConnected(Callback successCallback) {
+        if (this.adapter == null) {
+            this.adapter = BLEPrinterAdapter.getInstance();
+        }
+        successCallback.invoke(((BLEPrinterAdapter)this.adapter).isConnected());
+    }
+
+    @ReactMethod
     @Override
     public void closeConn() {
         if (this.adapter == null) {
@@ -77,7 +85,7 @@ public class RNBLEPrinterModule extends ReactContextBaseJavaModule implements RN
     @Override
     public void printImageData(String imageUrl, int imageWidth, int imageHeight, Callback errorCallback) {
         Log.v("imageUrl", imageUrl);
-        adapter.printImageData(imageUrl, imageWidth, imageHeight,errorCallback);
+        adapter.printImageData(imageUrl, imageWidth, imageHeight, errorCallback);
     }
 
     @ReactMethod
@@ -85,7 +93,7 @@ public class RNBLEPrinterModule extends ReactContextBaseJavaModule implements RN
     public void printImageBase64(String base64, int imageWidth, int imageHeight, Callback errorCallback) {
         byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        adapter.printImageBase64(decodedByte, imageWidth, imageHeight,errorCallback);
+        adapter.printImageBase64(decodedByte, imageWidth, imageHeight, errorCallback);
     }
 
     @ReactMethod

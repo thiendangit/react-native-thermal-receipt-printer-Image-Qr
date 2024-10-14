@@ -234,6 +234,11 @@ const BLEPrinter = {
       )
     ),
 
+  isConnected: (): Promise<boolean> =>
+    new Promise((resolve) =>
+        RNBLEPrinter.isConnected((connected: boolean) => resolve(connected)
+    )),
+
   getDeviceList: (): Promise<IBLEPrinter[]> =>
     new Promise((resolve, reject) =>
       RNBLEPrinter.getDeviceList(
